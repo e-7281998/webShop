@@ -26,14 +26,15 @@ public class LoginServlet extends HttpServlet {
 		AdminVO admin = service.loginCheck(email, pass);
 		System.out.println(admin==null ? "로그인 실패" : admin);
 		
-		//응답 문서 만들기
+		//응답 문서 만들기 : header + ResponseBody에 문자열 출력하기
 		//<meta charset="UTF-8">와 같음
 		response.setContentType("text/html;charset=utf-8");	
+		//일단 응답 문서를 만들음 => response.getWriter()
 		PrintWriter out = response.getWriter();
 		
 		if(admin == null) {
 			//3초 후에 refresh해라. login.jsp로. 이 내용을 헤더에 알려줌. 현재 /auth 이므로 경로는 맞춰서 사용하면 됨
-			response.setHeader("refresh", "3;login.jsp");
+			response.setHeader("refresh", "3;login.jsp");	//html중 <head>에 들어감. 세팅함
 			out.print("<h1>Login Fail</h1>");
 			return;
 		}

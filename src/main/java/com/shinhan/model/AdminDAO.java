@@ -32,4 +32,22 @@ public class AdminDAO {
 		}
 		return admin;
 	}
+	
+	public int registerAdmin(AdminVO admin) {
+		int result = 0;
+			String sql = " insert into admins(email,pass,manager_name) values(?,?,?)";
+			conn = OracleUtil.getConnection();
+		try {
+			st = conn.prepareStatement(sql);
+			st.setString(1, admin.getEmail());
+			st.setString(2, admin.getPass());
+			st.setString(3, admin.getManager_name());
+			result = st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			OracleUtil.dbDisconnect(rs, st, conn);
+		}
+			return result;
+		}
 }

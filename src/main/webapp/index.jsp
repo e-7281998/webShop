@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 3초 후에 login.jsp로 가도록 설정(고정) -->
+<!-- <meta http-equiv="refresh" content="3;auth/login.jsp"> -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,5 +44,10 @@
 			</form>
 		</li>
 	</ul>
+	<a href="auth/login.jsp">로그인 하기 (상대경로)</a>
+	<a href="<%=request.getContextPath() %>/auth/login.jsp">로그인 하기 (절대경로)</a>
+	<h2>직원관리</h2>
+	<a href="<%=request.getContextPath() %>/emp/emplist.do">직원조회</a>
+	<a href="<%=request.getContextPath() %>/emp/empinsert.do">직원등록</a>
 </body>
 </html>
