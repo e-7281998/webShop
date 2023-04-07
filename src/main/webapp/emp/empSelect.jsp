@@ -31,20 +31,7 @@
   
   h1{
     margin-bottom: 30px;
-  }
-  /*
-  thead tr, thead td{
-	 background-color: lightblue;
-	 padding: 10px;
-  }
-  table, tr, td{
-     border: 1px solid gray;
-     border-collapse: collapse;
-     padding: 0.5em;
-  }
-  .aa:hover, 	::selection {
-    background-color: orange;
-  } */
+  } 
 .orange {
 	background-color: orange;
 }
@@ -77,6 +64,14 @@ table{
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+	$(() => {
+		$(".btnDel").on("click",function(){
+			//get방식임.
+			location.href="empDelete.do?empid="+$(this).attr("data-del");
+		})
+	});
+</script>
 <script>
    $(function(){
 	   
@@ -164,6 +159,7 @@ table{
 <body>
 	<div class="container mt-3">
 		<h1>직원목록</h1>
+		<div>로그인한 사용자 : ${loginUser.manager_name}</div>
 		<div id="empbtn">
 			<button onclick="location.href='emp_insert.html'" type="button"
 				class="btn btn-success">직원등록</button>
@@ -205,6 +201,7 @@ table{
 					<th>메니져</th>
 					<th>커미션</th>
 					<th>부서</th>
+					<th>부서</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -223,6 +220,8 @@ table{
 					<td><%=emp.getManager_id()%></td>
 					<td><%=emp.getCommission_pct()%></td>
 					<td><%=emp.getDepartment_id()%></td>
+					<td><button class="btnDel" data-del="<%=emp.getEmployee_id()%>">삭제</button></td>
+<%-- 					<td><button onclic="call(<%=emp.getEmployee_id()%>)" >삭제</button></td> --%>
 				</tr>
 				<%
 				}

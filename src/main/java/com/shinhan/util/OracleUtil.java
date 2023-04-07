@@ -1,13 +1,36 @@
 package com.shinhan.util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OracleUtil {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
+public class OracleUtil {
+	
+	//1. DB 연결
+	public static Connection getConnection() {
+		Context initContext;
+		Connection conn = null;
+		try {
+			initContext = new InitialContext();
+			Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+ 			 conn = ds.getConnection();
+ 		} catch (NamingException e) {
+ 			e.printStackTrace();
+		}catch (SQLException e) {
+ 			e.printStackTrace();
+		}
+		return conn; 
+	}
+	
+
+	/*기존..
 	 //1.DB연결
 	public static Connection getConnection() {
 		Connection conn = null;
@@ -25,6 +48,7 @@ public class OracleUtil {
 		}
 		return conn;
 	}
+	*/
 	 //2.자원반납
 	public static void dbDisconnect(ResultSet rs, Statement st, Connection conn) {
 		try {

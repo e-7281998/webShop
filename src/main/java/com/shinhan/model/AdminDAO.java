@@ -13,6 +13,25 @@ public class AdminDAO {
 	PreparedStatement st;
 	ResultSet rs;
 	
+	public int dupCheck(String email ) {
+ 		String sql = "select count(*) from admins where email =? ";
+		int count = 0;
+ 		conn = OracleUtil.getConnection();
+		try {
+			st = conn.prepareStatement(sql);
+			st.setString(1, email);
+			rs = st.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			OracleUtil.dbDisconnect(rs, st, conn);
+		}
+		return count;
+	}
+	
 	public AdminVO loginCheck(String email, String pass) {
 		AdminVO admin = null;
 		String sql = "select manager_name from admins where email =? and pass =?";

@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.shinhan.model.EmpService;
+import com.shinhan.vo.AdminVO;
 import com.shinhan.vo.EmpVO;
 
 /**
@@ -21,6 +23,18 @@ public class EmpListServelet extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession browser = request.getSession();
+		
+		AdminVO user = (AdminVO) browser.getAttribute("loginUser");
+		//AdminVO user = (AdminVO) request.getAttribute("loginUser");
+		System.out.println("user:" + user);
+		
+		if(user==null) {
+			response.sendRedirect("../auth/loginCheck.do");
+			return;
+		}
+		
 		 EmpService service = new EmpService();
 		 List<EmpVO> emplist = service.selectAll();
 		 
