@@ -9,6 +9,7 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js"></script>
 <script>
 	$(() => {
+		
  		//page이동 없이 서버에 요청 보내고 응답받기 : ajax
 		$("#emailDupCheck").on("click",() =>{
  			$.ajax({

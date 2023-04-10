@@ -24,16 +24,17 @@ public class EmpListServelet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession browser = request.getSession();
+		//LogintCheckFilter로 뺌
+//		HttpSession browser = request.getSession();
 		
-		AdminVO user = (AdminVO) browser.getAttribute("loginUser");
-		//AdminVO user = (AdminVO) request.getAttribute("loginUser");
-		System.out.println("user:" + user);
-		
-		if(user==null) {
-			response.sendRedirect("../auth/loginCheck.do");
-			return;
-		}
+//		AdminVO user = (AdminVO) browser.getAttribute("loginUser");
+//		//AdminVO user = (AdminVO) request.getAttribute("loginUser");
+//		System.out.println("user:" + user);
+//		
+//		if(user==null) {
+//			response.sendRedirect("../auth/loginCheck.do");
+//			return;
+//		}
 		
 		 EmpService service = new EmpService();
 		 List<EmpVO> emplist = service.selectAll();

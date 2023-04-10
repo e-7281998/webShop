@@ -56,6 +56,16 @@
     border-radius: 10px;
     border: none;
 }
+#btnLogout{
+	color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+ 	display: inline-block;
+	background-color: red;
+	border-radius: 16px;
+	margin-bottom: 20px;
+	border: none;
+}
 #stylebtn button:hover{
 	background-color: orange;
 }
@@ -74,6 +84,18 @@ table{
 </script>
 <script>
    $(function(){
+	   
+	   $("#btnLogout").on("click", () => {
+			 $.ajax({
+				url: "../auth/logout.do",
+				success: () => {
+					alert("로그아웃 되었습니다.");
+				},
+				error: (msg) => {
+					alert(msg);
+				}
+			});
+		}); 
 	   
 	   $("thead tr th").click(function(e){
 		   var trNum = $(this).closest("th").prevAll().length;
@@ -155,11 +177,15 @@ table{
 	   
    });
   </script>
+ 
 </head>
 <body>
 	<div class="container mt-3">
 		<h1>직원목록</h1>
-		<div>로그인한 사용자 : ${loginUser.manager_name}</div>
+		<div>
+			<span>로그인한 사용자 : ${loginUser.manager_name}</span>
+	     	<input type="button" value="로그아웃" id="btnLogout">
+		</div> 
 		<div id="empbtn">
 			<button onclick="location.href='emp_insert.html'" type="button"
 				class="btn btn-success">직원등록</button>

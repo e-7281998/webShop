@@ -45,7 +45,7 @@ public class EmpDetailServlet extends HttpServlet {
 	
 	private EmpVO makeEmp(HttpServletRequest request) throws UnsupportedEncodingException {
 		//입력된 파라메터를 읽어서 DV에 저장하기 위해 옴.
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");	//필터에서 수행하고 옴
 		String first_name =request.getParameter("first_name");
 		String last_name =request.getParameter("last_name");
 		String email =request.getParameter("email");
