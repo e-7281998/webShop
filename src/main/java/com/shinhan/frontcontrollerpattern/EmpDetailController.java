@@ -1,46 +1,36 @@
-package com.shinhan.controller;
+package com.shinhan.frontcontrollerpattern;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
-import java.sql.SQLException;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.shinhan.model.EmpService;
 import com.shinhan.util.DateUtil;
 import com.shinhan.vo.EmpVO;
 
-/**
- * Servlet implementation class EmpDetailServlet
- */
-//@WebServlet("/emp/empDetail.do")
-public class EmpDetailServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//상세보기 하고싶음... a태그로 왔으니 get방식
-		EmpService service = new  EmpService();
-		int empid = Integer.parseInt(request.getParameter("empid"));
-		EmpVO emp = service.selectById(empid);
-		
-		request.setAttribute("emp", emp);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("empDetail.jsp");
-		rd.forward(request, response);
-	} 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		EmpVO emp = makeEmp(request);
-		EmpService service = new  EmpService();
-		String message = service.empUpdate(emp);
-		response.sendRedirect("emplist.do"); 
+public class EmpDetailController implements CommonControllerInterface {
+
+	@Override
+	public String execute(Map<String, Object> data) throws Exception {
+		String method = (String)data.get("method");
+		String page = "empDetail.jsp";
+		HttpServletRequest request = (HttpServletRequest)data.get("request");
+		if(method.equals("GET")) {
+			int empid = Integer.parseInt(request.getParameter("empid"));
+			EmpService service = new  EmpService();
+			EmpVO emp = service.selectById(empid);
+			
+			request.setAttribute("emp", emp);
+		}else {
+			EmpVO emp = makeEmp(request);
+			EmpService service = new  EmpService();
+			String message = service.empUpdate(emp);
+			page = "redirect:emplist.do"; 
+		}
+		 return page;
+		 
 	}
 	
 	private EmpVO makeEmp(HttpServletRequest request) throws UnsupportedEncodingException {

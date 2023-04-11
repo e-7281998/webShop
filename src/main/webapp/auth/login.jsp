@@ -12,11 +12,11 @@
 		
  		//page이동 없이 서버에 요청 보내고 응답받기 : ajax
 		$("#emailDupCheck").on("click",() =>{
- 			$.ajax({
+  			$.ajax({
 				url:"emailDupCheck.do",
 				data:{"email":$("#m_email").val()},
 				success: (responseData)=>{ 
-					var message = responseData ==1 ? "이미 존재하는 이메일" : "사용 가능한 이메일";
+ 					var message = responseData ==1 ? "이미 존재하는 이메일" : "사용 가능한 이메일";
 					$("#message").text(message);
 					if(responseData == 1){
 						$("#m_email").val("");

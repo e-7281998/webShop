@@ -15,7 +15,7 @@ import com.shinhan.vo.AdminVO;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet("/auth/signup.do")
+//@WebServlet("/auth/signup.do")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  

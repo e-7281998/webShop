@@ -21,7 +21,7 @@ import com.shinhan.vo.AdminVO;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/auth/loginCheck.do")	//url 매핑 주소를 정함
+//@WebServlet("/auth/loginCheck.do")	//url 매핑 주소를 정함
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

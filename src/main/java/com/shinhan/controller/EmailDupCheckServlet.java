@@ -14,7 +14,7 @@ import com.shinhan.model.AdminService;
 /**
  * Servlet implementation class EmailDupCheckServlet
  */
-@WebServlet("/auth/emailDupCheck.do")
+//@WebServlet("/auth/emailDupCheck.do")
 public class EmailDupCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  

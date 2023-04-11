@@ -34,6 +34,7 @@ input[name="job_id"]{
 <body>
 	<div id="container">
 		<h1>직원 상세보기</h1> 
+		<%@ include file="../common/Header.jsp" %>	
 		<form method="post" action="<%=request.getContextPath()%>/emp/empDetail.do" class="mb-3">
 			<table>
 				<tr class="form-floating">

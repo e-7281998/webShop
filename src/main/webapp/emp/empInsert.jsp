@@ -1,10 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="errorPage.jsp"%>
+    
+ <%
+ //자바 코드 작성 ...service의 코드에 삽입된다.
+ String subject = "js 코드";
+ //파라미터로 안들어오면 에러남. null을 Integer로 바꿀 수 없으므로
+ //url에 ?age=20 이렇게 작성해서 넘겨줘야 함.
+ int age = Integer.parseInt(request.getParameter("age"));
+ %>
+  <%!
+  //자바 코드 작성... 선언부 - 별도의 메서드로 만들어진다.
+  int score = 100;
+  public int add(int a, int b){
+	  return a + b;
+  }
+  %>
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>직원등록1</title>
+<!-- 주석 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -12,6 +29,12 @@
 </head>
 <body>
 <h1>직원정보 입력</h1>
+<%-- JSP 주석 --%>
+Subject : <%=subject %><br>
+Score : <%=score %><br>
+add함수 : <%= add(100, 200) %><br>
+age : <%=age %>
+
 <!-- http://localhost:9999/ -->
 <form method="post" action="<%=request.getContextPath() %>/emp/empinsert.do" class="mb-3">
 <table >

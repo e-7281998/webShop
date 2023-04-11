@@ -182,16 +182,17 @@ table{
 <body>
 	<div class="container mt-3">
 		<h1>직원목록</h1>
-		<div>
-			<span>로그인한 사용자 : ${loginUser.manager_name}</span>
-	     	<input type="button" value="로그아웃" id="btnLogout">
-		</div> 
+		<!-- include 디렉티브는 소스를 합쳐서 컴파일 한다. -->
+		<%@ include file="../common/Header.jsp" %>
 		<div id="empbtn">
 			<button onclick="location.href='emp_insert.html'" type="button"
 				class="btn btn-success">직원등록</button>
-			<a type="button" class="btn btn-success" href="empInsert.jsp">직원등록</a>
+			<a type="button" class="btn btn-success" href="empinsert.do">직원등록</a>
+			
 		</div>
-		
+		<form method="post" action="<%=request.getContextPath() %>/emp/empinsert.do">
+				<input type="submit" value="직원등록-폼">
+		</form>
 		<div id="stylebtn">
 			<button>짝수 행 선택</button>
 			<button>홀수 행 선택</button>
