@@ -3,7 +3,8 @@ package com.shinhan.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -23,17 +24,18 @@ import com.shinhan.vo.AdminVO;
 @WebServlet("/auth/loginCheck.do")	//url 매핑 주소를 정함
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
+	
+	//웹 어플리케이션에 하나있다. 공유 영역임. ServletContext
+	ServletContext app;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//웹 어플리케이션에 하나있다. 공유 영역임. ServletContext
-		ServletContext app = request.getServletContext();
+		app = getServletContext();
 		Object obj = app.getAttribute("visitor");
-		int count = 1;
-		if(obj!=null) {
-			count = (Integer)obj;
-			count++;
-		}
-		app.setAttribute("visitor", count);
+//		int count = 1;
+//		if(obj!=null) {
+//			count = (Integer)obj;
+//			count++;
+//		}
+//		app.setAttribute("visitor", count);
 		
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("login.jsp");
@@ -47,6 +49,25 @@ public class LoginServlet extends HttpServlet {
 		AdminService service = new AdminService();
 		AdminVO admin = service.loginCheck(email, pass);
 		System.out.println(admin==null ? "로그인 실패" : admin);
+		
+		List<AdminVO> userList = null;
+		Object obj = app.getAttribute("userList");
+		if(admin != null) {
+			if(obj== null) {
+				userList = new ArrayList<>();
+
+			}else {
+				userList = (List<AdminVO>)obj;
+			}
+			userList.add(admin);
+			app.setAttribute("userList", userList);
+			
+			for(AdminVO vo:userList) {
+				System.out.println("로그인 한 사람 : "+vo);
+			}
+		}
+		
+ 		
 		
 		//응답 문서 만들기 : header + ResponseBody에 문자열 출력하기
 		//<meta charset="UTF-8">와 같음
