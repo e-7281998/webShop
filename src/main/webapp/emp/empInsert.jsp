@@ -6,7 +6,7 @@
  String subject = "js 코드";
  //파라미터로 안들어오면 에러남. null을 Integer로 바꿀 수 없으므로
  //url에 ?age=20 이렇게 작성해서 넘겨줘야 함.
- int age = Integer.parseInt(request.getParameter("age"));
+// int age = Integer.parseInt(request.getParameter("age"));
  %>
   <%!
   //자바 코드 작성... 선언부 - 별도의 메서드로 만들어진다.
@@ -22,9 +22,8 @@
 <meta charset="UTF-8">
 <title>직원등록1</title>
 <!-- 주석 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<%@include file = "../common/commonFiles.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css" type="text/css">
 
 </head>
 <body>
@@ -33,7 +32,7 @@
 Subject : <%=subject %><br>
 Score : <%=score %><br>
 add함수 : <%= add(100, 200) %><br>
-age : <%=age %>
+<%-- age : <%=age %> --%>
 
 <!-- http://localhost:9999/ -->
 <form method="post" action="<%=request.getContextPath() %>/emp/empinsert.do" class="mb-3">

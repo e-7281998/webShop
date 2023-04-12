@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+ 
+  h1{
+    margin-bottom: 30px;
+  } 
+.orange {
+	background-color: orange;
+}
+
+.white {
+	background-color: white;
+}
+
+#empbtn{
+	display: inline-block;
+}
+
+#stylebtn{
+    display: inline-block;
+    float: right;
+}
+#stylebtn button{
+	background-color: darkorange;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+#btnLogout{
+	color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+ 	display: inline-block;
+	background-color: red;
+	border-radius: 16px;
+	margin-bottom: 20px;
+	border: none;
+}
+#stylebtn button:hover{
+	background-color: orange;
+}
+table{
+	margin-top: 30px;
+}

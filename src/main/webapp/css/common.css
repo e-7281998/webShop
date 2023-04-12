@@ -1,0 +1,12 @@
+@charset "UTF-8";
+header {
+	background-color: rgb(128, 255, 255);
+	border-radius: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+header > span {
+	font-weight: bold;
+	font-size: 20px;	
+}

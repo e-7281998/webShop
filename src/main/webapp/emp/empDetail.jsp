@@ -5,31 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>직원 상세보기</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<style>
-#container {
-	width: 400px;
-	border: 1px solid #333;
-	margin: 0 auto;
-	padding: 20px;
-	text-align: center;
-}
+<%@include file = "../common/commonFiles.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/detail.css" type="text/css">
 
-
-input[name="email"],
-input[name="salary"],
-input[name="department_id"],
-input[name="manager_id"],
-input[name="hire_date"],
-input[name="job_id"]{
-	background: lightgreen;
-}
-</style>
 </head>
 <body>
 	<div id="container">

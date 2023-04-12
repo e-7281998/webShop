@@ -2,78 +2,19 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-	List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
-%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-<style>
-/* #container{
-       
-      width: 80%;
-      margin: 0 auto;
-  }
-  */
-  
-  h1{
-    margin-bottom: 30px;
-  } 
-.orange {
-	background-color: orange;
-}
+<%@include file = "../common/commonFiles.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/common.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/select.css" type="text/css">
 
-.white {
-	background-color: white;
-}
-
-#empbtn{
-	display: inline-block;
-}
-
-#stylebtn{
-    display: inline-block;
-    float: right;
-}
-#stylebtn button{
-	background-color: darkorange;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-}
-#btnLogout{
-	color: white;
-    font-weight: bold;
-    padding: 5px 10px;
- 	display: inline-block;
-	background-color: red;
-	border-radius: 16px;
-	margin-bottom: 20px;
-	border: none;
-}
-#stylebtn button:hover{
-	background-color: orange;
-}
-table{
-	margin-top: 30px;
-}
-</style>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(() => {
 		$(".btnDel").on("click",function(){
@@ -84,19 +25,7 @@ table{
 </script>
 <script>
    $(function(){
-	   
-	   $("#btnLogout").on("click", () => {
-			 $.ajax({
-				url: "../auth/logout.do",
-				success: () => {
-					alert("로그아웃 되었습니다.");
-				},
-				error: (msg) => {
-					alert(msg);
-				}
-			});
-		}); 
-	   
+	  
 	   $("thead tr th").click(function(e){
 		   var trNum = $(this).closest("th").prevAll().length;
 		   var a = $("tbody tr").each(function(index, item){
@@ -154,6 +83,11 @@ table{
 	   //body > div > table > tbody > tr:nth-child(2) > td:nth-child(2)
 	   $("#stylebtn > button:nth-child(3)").click(function(){
 			var start = prompt("찾고자하는 직원의 이름을 입력하세요",'Steven');
+			
+			var f = start.charAt(0).toUpperCase();
+			var s = start.slice(1).toLowerCase(); 
+			start = f+s;
+			
 		   //$("tbody > tr > td:nth-child(2):contains('S')"); //이름이 S로 시작하는 직원 찾기
 		   $("tbody > tr > td:nth-child(2)").parent().css({"backgroundColor":"transparent", "fontWeight":"400"});
 		   $("tbody > tr > td:nth-child(2):contains('"+start+"')").parent().css({"backgroundColor":"lightyellow", "fontWeight":"bold"});
@@ -183,14 +117,22 @@ table{
 	<div class="container mt-3">
 		<h1>직원목록</h1>
 		<!-- include 디렉티브는 소스를 합쳐서 컴파일 한다. -->
+		<%-- include 지시자 <%@ include file="../common/Header.jsp" %>  --%>
 		<%@ include file="../common/Header.jsp" %>
+		<p>
+			jsp는 합쳐서 컴파일 됨... header에서 작성한 company...
+			<br><%=company %>
+		</p>
+		<!-- include action tag이용 : 컴파일하고 합침 -->
+		<%-- <jsp:include page="../common/Header.jsp"></jsp:include>  --%>
+		
 		<div id="empbtn">
 			<button onclick="location.href='emp_insert.html'" type="button"
 				class="btn btn-success">직원등록</button>
 			<a type="button" class="btn btn-success" href="empinsert.do">직원등록</a>
 			
 		</div>
-		<form method="post" action="<%=request.getContextPath() %>/emp/empinsert.do">
+		<form method="post" action="${path}/emp/empinsert.do">
 				<input type="submit" value="직원등록-폼">
 		</form>
 		<div id="stylebtn">
@@ -232,27 +174,23 @@ table{
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				for (EmpVO emp : emplist) {
-				%>
+				<!--  for(EmpVO emp:empAll -->
+				<c:forEach items="${empAll}" var="emp"> 
 				<tr>
-					<td><a href="empDetail.do?empid=<%=emp.getEmployee_id()%>"><%=emp.getEmployee_id()%></a></td>
-					<td><a href="empDetail.do?empid=<%=emp.getEmployee_id()%>"><%=emp.getFirst_name()%></a></td>
-					<td><%=emp.getLast_name()%></td>
-					<td><%=emp.getEmail()%></td>
-					<td><%=emp.getSalary()%></td>
-					<td><%=emp.getHire_date()%></td>
-					<td><%=emp.getPhone_number()%></td>
-					<td><%=emp.getJob_id()%></td>
-					<td><%=emp.getManager_id()%></td>
-					<td><%=emp.getCommission_pct()%></td>
-					<td><%=emp.getDepartment_id()%></td>
-					<td><button class="btnDel" data-del="<%=emp.getEmployee_id()%>">삭제</button></td>
-<%-- 					<td><button onclic="call(<%=emp.getEmployee_id()%>)" >삭제</button></td> --%>
-				</tr>
-				<%
-				}
-				%>
+					<td><a href="empDetail.do?empid=${emp.employee_id}">${emp.employee_id}</a></td>
+					<td><a href="empDetail.do?empid=${emp.employee_id}">${emp.first_name}</a></td>
+					<td>${emp.last_name} </td>
+					<td>${emp.email} </td>
+					<td>${emp.salary} </td>
+					<td>${emp.hire_date} </td>
+					<td>${emp.phone_number} </td>
+					<td>${emp.job_id} </td>
+					<td>${emp.manager_id} </td>
+					<td>${emp.commission_pct} </td>
+					<td>${emp.department_id} </td>
+					<td><button class="btnDel" data-del="${emp.employee_id}">삭제</button></td>
+ 				</tr>
+				</c:forEach>
 			</tbody>
 
 		</table>
