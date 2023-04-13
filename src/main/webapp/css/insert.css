@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+h1{
+	text-align: center; 
+	margin: 0 auto;
+	font-weight: bold;
+}
+table{
+	margin: 0 auto;
+}
+tr{
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+.modal-header,
+.modal-footer{
+	background-color: whitesmoke;
+}
+.modal-header .btn-close{
+	margin-left: 0;
+}
+.modal-footer input{
+	background-color: darkorange;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+.modal-footer input:hover{
+	background-color: orange;
+}

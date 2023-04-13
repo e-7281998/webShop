@@ -32,6 +32,16 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		
 		switch (path) { 
+		case "/download.do":
+			data.put("response", response);
+			controller = new DownloadController();
+			 break;
+		case "/upload.do":
+			controller = new UploadController();
+			 break;
+		case "/jstl.do":
+			controller = new JSTLController();
+			 break;
 		case "/auth/loginCheck.do":
 			controller = new LoginController();
 			 break;
@@ -74,6 +84,9 @@ public class FrontController extends HttpServlet {
 			response.sendRedirect(page.substring(9));
 		}else if(page.indexOf("responseBody") >= 0){
 			response.getWriter().append(page.charAt(page.length()-1));
+			//response.getWriter().append(page.substring(13));
+		}else if(page.indexOf("download") >= 0){
+			//response.getWriter().append("download OK!");
 			//response.getWriter().append(page.substring(13));
 		}else {	//redirect가 아니면 포워드 시키기
 			RequestDispatcher rd;

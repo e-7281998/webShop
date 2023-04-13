@@ -38,6 +38,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		//if의 조건들은 로그인 되었는지 체크하면 안됨. 로그아웃 상태여도 가능해야 함.
 		if(req.getServletPath().equals("/auth/loginCheck.do") ||
 			req.getServletPath().equals("/auth/signup.do") ||
+			req.getServletPath().equals("/jstl.do") ||
 			req.getServletPath().equals("/auth/emailDupCheck.do")) {
 				
 		}else {
