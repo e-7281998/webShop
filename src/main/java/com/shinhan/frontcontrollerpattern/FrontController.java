@@ -32,6 +32,12 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		
 		switch (path) { 
+		case "/site-result/jobsAjax.do":
+ 			controller = new JobsAjaxController();
+			 break;
+		case "/site-result/layout.do":
+ 			controller = new LayoutTestController();
+			 break;
 		case "/download.do":
 			data.put("response", response);
 			controller = new DownloadController();
@@ -83,8 +89,8 @@ public class FrontController extends HttpServlet {
 			//redirect:auth/loginCheck.do가 들어오면 9번째부터 끝까지 잘라서 보내라(redirect:는 잘라야 하므로)
 			response.sendRedirect(page.substring(9));
 		}else if(page.indexOf("responseBody") >= 0){
-			response.getWriter().append(page.charAt(page.length()-1));
-			//response.getWriter().append(page.substring(13));
+			//response.getWriter().append(page.charAt(page.length()-1));
+			response.getWriter().append(page.substring(13));
 		}else if(page.indexOf("download") >= 0){
 			//response.getWriter().append("download OK!");
 			//response.getWriter().append(page.substring(13));
