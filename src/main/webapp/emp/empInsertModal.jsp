@@ -1,7 +1,16 @@
+<%@page import="com.shinhan.model.CompanyService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/insert.css" type="text/css">
-	
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/insert.css" type="text/css">
+<%
+//모달은 그냥 페이지만 불려갔음... EmpInsertController를 거치지 않음.. 그러므로 어쩔수 없이 java 코드 넣음
+
+CompanyService service = new CompanyService();
+request.setAttribute("deptList", service.deptSelectAll());
+request.setAttribute("managerList", service.managerSelectAll());
+request.setAttribute("jobList", service.jobSelectAll());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +60,19 @@
 							</tr>
 							<tr>
 								<td>부서</td>
-								<td><input type="number" name="department_id" value="60"></td>
+								<td><select name="department_id">
+										<c:forEach items="${deptList}" var="dept">
+											<option value="${dept.department_id}">${dept.department_name}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td>메니져</td>
-								<td><input type="number" name="manager_id" value="100"></td>
+								<td><select name="manager_id">
+										<c:forEach items="${managerList}" var="manager">
+											<option value="${manager.employee_id}">${manager.first_name}-${manager.last_name}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td>커미션</td>
@@ -68,8 +85,11 @@
 							</tr>
 							<tr>
 								<td>직급</td>
-								<td><input type="text" name="job_id" required="required"
-									value="IT_PROG"></td>
+								<td><select name="job_id">
+										<c:forEach items="${jobList}" var="job">
+											<option value="${job.job_id}">${job.job_title}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 						</table>
 				</div>

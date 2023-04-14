@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.shinhan.model.CompanyService;
 import com.shinhan.model.EmpService;
 import com.shinhan.util.DateUtil;
 import com.shinhan.vo.EmpVO;
@@ -23,6 +24,13 @@ public class EmpDetailController implements CommonControllerInterface {
 			EmpVO emp = service.selectById(empid);
 			
 			request.setAttribute("emp", emp);
+
+			CompanyService comService = new CompanyService();
+			request.setAttribute("deptList", comService.deptSelectAll());
+			request.setAttribute("managerList", comService.managerSelectAll());
+			request.setAttribute("jobList", comService.jobSelectAll());
+		
+			
 		}else {
 			EmpVO emp = makeEmp(request);
 			EmpService service = new  EmpService();
