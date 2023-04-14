@@ -70,8 +70,8 @@ String subject = "js 코드";
 				<td>부서</td>
 				<td>
 					<select name="department_id">
-						<c:forEach items="${deptList}" var="dept">
-							<option value="${dept.department_id}">${dept.department_name}</option>
+						<c:forEach items="${deptList}" var="dept" varStatus="status">
+							<option value="${dept.department_id}">${status.count} : ${dept.department_name}</option>
 						</c:forEach>
 					</select> 
 				</td>
