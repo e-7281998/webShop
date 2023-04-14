@@ -12,6 +12,31 @@
 <%@ include file="../common/commonFiles.jsp"%>
 
 <script>
+	function profile(){
+		$.ajax({
+			url: 'adminPicAjax.do',
+			method: 'get',
+			success: function(responseData){
+				console.log(responseData)
+				//1번 방법
+				$("#gallery").html(responseData);
+				
+				//
+				$("#gallery li img").each(function(index, item){
+					var img = $(item).attr("src");
+ 					$("#quick-icon"+(index+1)).css({"background-image":"url("+img+")","background-size":"cover" });
+/* 					$("#quick-icon"+(index+1)).css("background-image","url("+img+")"); */
+				});
+				
+				 
+			},
+			error: function(message){
+				alert('오류: ' + message);
+				console.log(message);
+			}
+		})
+	}
+
 	function call() {
 		$.ajax({
 			url : 'jobsAjax.do',
@@ -64,9 +89,7 @@
 							<li><a href="#">곶자왈 체험</a></li>
 							<li><a href="#">힐링 워크샵</a></li>
 						</ul></li>
-					<li><a href="#">갤러리</a></li>
-					<!--           <li><a href="question.do">문의하기</a></li>
- -->
+					<li><a href="javascript:profile()">갤러리</a></li> 
 					<li><a href="javascript:call()">문의하기</a></li>
 				</ul>
 			</nav>
@@ -84,7 +107,7 @@
 			<div id="tabMenu">
 				<input type="radio" id="tab1" name="tabs" checked> <label
 					for="tab1">공지사항</label> <input type="radio" id="tab2" name="tabs">
-				<label for="tab2">갤러리</label>
+				<label for="tab2" onclick="profile()">갤러리</label>
 				<div id="notice" class="tabContent">
 					<h2>공지사항 내용입니다.</h2>
 					<div id="here">
@@ -99,15 +122,7 @@
 
 				</div>
 				<div id="gallery" class="tabContent">
-					<h2>갤러리 내용입니다.</h2>
-					<ul>
-						<li><img src="images/img-1.jpg"></li>
-						<li><img src="images/img-2.jpg"></li>
-						<li><img src="images/img-3.jpg"></li>
-						<li><img src="images/img-1.jpg"></li>
-						<li><img src="images/img-2.jpg"></li>
-						<li><img src="images/img-3.jpg"></li>
-					</ul>
+					<%@include file="adminView.jsp" %>
 				</div>
 			</div>
 			<div id="links">

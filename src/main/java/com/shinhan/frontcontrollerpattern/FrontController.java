@@ -32,6 +32,9 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		
 		switch (path) { 
+		case "/site-result/adminPicAjax.do":
+ 			controller = new AdminPicAjaxController();
+			 break;
 		case "/site-result/jobsAjax.do":
  			controller = new JobsAjaxController();
 			 break;
